@@ -42,14 +42,14 @@ const Button = styled.button`
 `;
 
 const mapStateToProps = (state: RootState) => ({
-  movie: state.movies.movie,
-  results: state.movies.results,
+  selectedMovie: state.movies.selectedMovie,
+  list: state.movies.list,
   pageNumber: state.movies.pageNumber,
 });
 const dispatchProps = {
   getMoviesByName: (e: any) => actions.getMoviesByName.request(e),
-  getMoreResults: (movie: string, pageNumber: number) => actions.getMoreMovies.request({ movie, pageNumber }),
-
+  clearMovies: actions.getMoviesByName.cancel
+  // getMoreResults: (movie: string, pageNumber: number) => actions.getMoreMovies.request({ movie, pageNumber }),
 };
 
 type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
@@ -107,16 +107,22 @@ class Search extends Component<Props> {
   //   this.setState({ pageNumber: this.state.pageNumber + 1 });
   //   this.getMoreResults(this.state.pageNumber + 1);
   // }
-
+  handleChange(e: any){
+    const {getMoviesByName, clearMovies} = this.props;
+    !!e.target.value ?
+      getMoviesByName(e.target.value)
+      :
+      clearMovies()
+  }
   render() {
-    const { getMoreResults, getMoviesByName, movie, results, pageNumber } = this.props;
+    const { getMoviesByName, selectedMovie, list, pageNumber } = this.props;
     return (
       <>
-        <SearchInput type="text" value={movie} onChange={(e) => getMoviesByName(e.target.value)} placeholder={'Search for movie'} />
-        <List list={results} />
-        {results && results.length > 0 &&
-          <Button onClick={() => getMoreResults(movie, pageNumber)}> Load More </Button>
-        }
+        <SearchInput type="text" value={selectedMovie} onChange={(e) => this.handleChange(e)} placeholder={'Search for movie'} />
+        <List list={list} />
+        {/* {list && list.length > 0 &&
+          // <Button onClick={() => getMoreResults(movie, pageNumber)}> Load More </Button>
+        } */}
       </>
     );
   }

@@ -1,9 +1,10 @@
 import * as Actions from '../actions';
 import _ from 'lodash';
+import { MovieReducer } from '../models';
 
-const initialState = {
-    movie: 'eqweqwe',
-    results: [],
+const initialState: MovieReducer = {
+    selectedMovie: '',
+    list: [],
     pageNumber: 1
 }
 
@@ -15,13 +16,18 @@ export function moviesReducer(
         case 'MOVIE_REQUEST':
             return {
                 ...state,
-                movie: action.payload,
-
+                selectedMovie: action.payload,
             }
         case 'MOVIE_SUCCESS':
             return {
-                ...state,
-                results: action.payload.results
+                ...state,                
+                list: action.payload.results
+            }
+        case 'MOVIE_CLEAR':
+            return {
+                ...state,                
+                selectedMovie: '',
+                list: [] 
             }
         case 'GET_MORE_MOVIE_REQUEST':
             return {
@@ -29,10 +35,10 @@ export function moviesReducer(
                 pageNumber: state.pageNumber + 1
             }
         case 'GET_MORE_MOVIE_SUCCESS':
-            console.log(state.results);
+            console.log(state.list);
             return {
                 ...state,
-                results: [...state.results, action.payload.results]
+                list: [...state.list[action.payload.id], action.payload.results]
             }
         case 'GET_MORE_MOVIE_FAILURE':
             return {

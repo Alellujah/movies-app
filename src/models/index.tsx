@@ -4,6 +4,12 @@ export interface Movie {
     title: string;
     original_title: string;
     release_date: string;
-    vote_avg: number;
+    vote_average: number;
     overview: string;
+}
+
+export interface MovieReducer{
+    selectedMovie: string;
+    list: {[key: number]: Movie[]};
+    pageNumber: number;
 }

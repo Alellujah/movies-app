@@ -1,4 +1,3 @@
-
 export interface Movie {
     id: number;
     title: string;
@@ -8,8 +7,9 @@ export interface Movie {
     overview: string;
 }
 
-export interface MovieReducer{
+export interface MovieReducer {
     selectedMovie: string;
-    list: {[key: number]: Movie[]};
+    list: { [key: number]: Movie[] };
     pageNumber: number;
+    toggleBtn: boolean;
 }

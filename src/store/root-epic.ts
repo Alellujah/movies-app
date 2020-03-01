@@ -1,5 +1,5 @@
 import { combineEpics } from 'redux-observable';
 
-import * as moviesEpics from '../epics/';
+import * as searchEpics from '../containers/SearchPage/redux/epics';
 
-export default combineEpics(...Object.values(moviesEpics));
+export default combineEpics(...Object.values(searchEpics));

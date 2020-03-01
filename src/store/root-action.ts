@@ -1,5 +1,5 @@
-import * as moviesActions from '../actions';
+import * as searchActions from '../containers/SearchPage/redux/actions';
 
 export default {
-  moviesActions,
+  searchActions,
 };

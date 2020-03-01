@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './components/Search/';
+import { SearchContainer } from './containers/SearchPage/SearchContainer';
 import styled from 'styled-components';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -20,7 +20,7 @@ function App() {
   return (
     <Provider store={store}>
       <AppWrapper>
-        <Search />
+        <SearchContainer />
       </AppWrapper>
     </Provider>
   );

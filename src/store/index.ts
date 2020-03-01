@@ -10,7 +10,7 @@ export const epicMiddleware = createEpicMiddleware<
   RootAction,
   RootAction,
   RootState
->();
+>({});
 
 // configure middlewares
 const middlewares = [epicMiddleware];

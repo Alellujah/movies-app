@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Backdrop, ModalContent, ModalRight, ModalLeft } from './styleComponents';
+import { Modal, Backdrop, ModalContent, ModalRight, ModalLeft, Lines, Row } from './styleComponents';
 import { ButtonList } from '../List/styleComponents';
 
 interface IDetailsProps {
@@ -33,8 +33,7 @@ class Detail extends Component<IDetailsProps> {
       <>
         {showModal &&
           <Backdrop>
-            <Modal>
-              <h1>{title} details</h1>
+            <Modal>              
               <ModalContent>
                 {poster_path &&
                   <ModalLeft>
@@ -42,15 +41,18 @@ class Detail extends Component<IDetailsProps> {
                   </ModalLeft>
                 }
                 <ModalRight>
-                  <span>Original Title: {original_title}</span>
-                  <span>Release Date: {release_date}</span>
-                  <span>Popularity: {popularity}</span>
-                  <span>Original Language: {original_language}</span>
-                  <span>Vote Avg: {vote_average}</span>
-                  <span>{overview}</span>
+                  <h1>{title} details</h1>
+                  <Row>
+                  <Lines><span>Original Title: </span>{original_title}</Lines>
+                  <Lines><span>Release Date: </span>{release_date}</Lines>
+                  <Lines><span>Popularity:</span> {popularity}</Lines>
+                  <Lines><span>Original Language:</span> {original_language}</Lines>
+                  <Lines><span>Vote Avg:</span> {vote_average}</Lines>
+                  </Row>
+                  <Lines><span>Overview:</span> {overview}</Lines>
+                  <ButtonList onClick={onClose}>Close</ButtonList>
                 </ModalRight>
-              </ModalContent>
-              <ButtonList onClick={onClose}>Close</ButtonList>
+              </ModalContent>              
             </Modal>
           </Backdrop>
         }

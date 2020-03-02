@@ -7,7 +7,7 @@ padding: 16px;
 border: 0;
 border-radius: 4px;
 box-shadow: 1px 1px 8px #000000;
-width: 80%;
+width: 86%;
 height: 24px;
 margin-top:32px;
 outline: 0;

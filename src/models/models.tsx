@@ -5,11 +5,7 @@ export interface Movie {
     release_date: string;
     vote_average: number;
     overview: string;
-}
-
-export interface MovieReducer {
-    selectedMovie: string;
-    list: { [key: number]: Movie[] };
-    pageNumber: number;
-    toggleBtn: boolean;
+    popularity: number;
+    original_language: string;
+    poster_path: string;
 }

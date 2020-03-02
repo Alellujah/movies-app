@@ -1,30 +1,38 @@
-import * as Actions from './actions';
-import { MovieReducer } from '../../../models';
+import * as searchActions from './actions';
+import { Movie } from '../../../models';
 import { ActionType, getType } from 'typesafe-actions';
+import { Reducer } from 'redux';
 import keyBy from 'lodash/keyBy';
 
-const initialState: MovieReducer = {
+interface MovieState {
+    selectedMovie: string;
+    list: { [key: number]: Movie }
+    pageNumber: number;
+    toggleBtn: boolean;
+}
+
+const initialState: MovieState = {
     selectedMovie: '',
     list: {},
     pageNumber: 1,
-    toggleBtn: false
+    toggleBtn: false,
 }
 
-export type SearchActions = ActionType<typeof Actions>;
+export type SearchActions = ActionType<typeof searchActions>;
 
-export function searchReducer(
+export const searchReducer: Reducer<MovieState, SearchActions> = (
     state = initialState,
-    action: SearchActions
-) {
+    action
+) => {
     switch (action.type) {
-        case getType(Actions.getMoviesByName.request):
+        case getType(searchActions.getMoviesByName.request):
             return {
                 ...state,
                 selectedMovie: action.payload,
                 pageNumber: 1
             }
-        case getType(Actions.getMoviesByName.success):
-            console.log('typing and getting movies');
+        case getType(searchActions.getMoviesByName.success):
+            console.log('Typing and searching...');
             if (action.payload.results.length < 20) {
                 return {
                     ...state,
@@ -37,43 +45,33 @@ export function searchReducer(
                     list: keyBy(action.payload.results, o => o.id)
                 }
             }
-        case getType(Actions.getMoviesByName.cancel):
+        case getType(searchActions.getMoviesByName.cancel):
             return {
                 ...state,
                 selectedMovie: '',
                 list: [],
                 toggleBtn: false
             }
-        case getType(Actions.getMoreMovies.request):
+        case getType(searchActions.getMoreMovies.request):
             return {
                 ...state,
                 pageNumber: state.pageNumber + 1
             }
-        case getType(Actions.getMoreMovies.success):
-            console.log('getting more movies');
+        case getType(searchActions.getMoreMovies.success):
+            console.log('Getting more movies...');
             return {
                 ...state,
                 list: Object.assign({ ...state.list }, keyBy(action.payload.results, o => o.id)),
                 pageNumber: state.pageNumber
             }
-        case getType(Actions.getMoreMovies.failure):
-            return {
-                ...state,
-                //TODO handle error
-            }
-        case getType(Actions.checkIfMoreAvailable.success):
-            console.log('checking if theres more available');
+        case getType(searchActions.checkIfMoreAvailable.success):
+            console.log('Checking if theres more available...');
             if (action.payload.results.length === 0) {
                 return {
                     ...state,
                     toggleBtn: true
                 }
             } else { return { ...state } }
-        case getType(Actions.checkIfMoreAvailable.failure):
-            return {
-                ...state,
-                //TODO handle error
-            }
         default:
             return state
     }

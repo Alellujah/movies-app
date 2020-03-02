@@ -1,1 +1,1 @@
-export { Movie, MovieReducer } from './Models.tsx';
+export { Movie, MovieReducer } from './models';

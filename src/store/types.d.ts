@@ -9,5 +9,6 @@ declare module 'typesafe-actions' {
 
   interface Types {
     RootAction: RootAction;
+    RooState: RootState;
   }
 }

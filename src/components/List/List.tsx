@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { Movie } from '../../models/';
-import { MoviesList, MoviesCard, MoviesRow, MoviesTD, Button } from './styleComponents';
+import { MoviesList, MoviesCard, MoviesRow, MoviesTD, Button, ButtonList } from './styleComponents';
 import _map from 'lodash/map';
 
 interface IListProps {
   movieList: Movie[];
   loadMore: () => void;
   disableBtn?: boolean;
+  onClickDetail: (id: number) => void;
 }
 
 class List extends Component<IListProps> {
   renderList(movieList: Movie[]) {
+    const { onClickDetail } = this.props;
     return (
       <MoviesList>
         {Object.keys(movieList).length > 0 ?
@@ -41,7 +43,7 @@ class List extends Component<IListProps> {
                     {m.overview}
                   </MoviesRow>
                 }
-                <Button>Details</Button>
+                <ButtonList onClick={() => onClickDetail(m.id)}>Details</ButtonList>
               </MoviesCard>)
           })
           :

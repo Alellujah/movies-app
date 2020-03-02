@@ -1,4 +1,4 @@
-import { createAsyncAction } from 'typesafe-actions';
+import { createAsyncAction, createAction } from 'typesafe-actions';
 import { APIResponse } from './epics';
 
 export const getMoviesByName = createAsyncAction(
@@ -19,3 +19,7 @@ export const checkIfMoreAvailable = createAsyncAction(
     'MORE_AVAILABLE_SUCCESS',
     'MORE_AVAILABLE_FAILURE'
 )<void, APIResponse, Error>();
+
+export const openModal = createAction('OPEN_MODAL', action => {
+    return (id: number) => action({ id })
+});

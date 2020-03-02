@@ -30,7 +30,7 @@ export const searchReducer: Reducer<MovieState, SearchActions> = (
                 ...state,
                 selectedMovie: action.payload,
                 pageNumber: 1,
-                toggleBtn: true
+                toggleBtn: false
             }
         case getType(searchActions.getMoviesByName.success):
             console.log('Typing and searching...');

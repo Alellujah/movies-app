@@ -56,7 +56,8 @@ export const searchReducer: Reducer<MovieState, SearchActions> = (
         case getType(searchActions.getMoreMovies.request):
             return {
                 ...state,
-                pageNumber: state.pageNumber + 1
+                pageNumber: state.pageNumber + 1,
+                toggleBtn: true
             }
         case getType(searchActions.getMoreMovies.success):
             console.log('Getting more movies...');
@@ -70,7 +71,8 @@ export const searchReducer: Reducer<MovieState, SearchActions> = (
                 return {
                     ...state,
                     list: Object.assign({ ...state.list }, keyBy(action.payload.results, o => o.id)),
-                    pageNumber: state.pageNumber
+                    pageNumber: state.pageNumber,
+                    toggleBtn: false
                 }
             }
         default:

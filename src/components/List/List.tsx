@@ -58,8 +58,10 @@ class List extends Component<IListProps> {
     return (
       <>
         {this.renderList(movieList)}
-        {Object.keys(movieList).length > 0 && !disableBtn &&
-          <Button onClick={() => loadMore()}>Load More</Button>
+        {Object.keys(movieList).length > 0 &&
+          <Button disabled={disableBtn} onClick={() => loadMore()}>
+            {!disableBtn ? 'Load More' : 'No more results...'}
+          </Button>
         }
       </>
     )

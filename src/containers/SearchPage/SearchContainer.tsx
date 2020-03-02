@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch: Dispatch<SearchActions>) => {
         getMoviesByName: (movieName: string) => dispatch(actions.getMoviesByName.request(movieName)),
         clearMovies: () => dispatch(actions.getMoviesByName.cancel()),
         getMoreMovies: () => dispatch(actions.getMoreMovies.request()),
-        checkIfMoreAvailable: () => dispatch(actions.checkIfMoreAvailable.request()),
     }
 }
 

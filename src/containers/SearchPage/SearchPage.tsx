@@ -19,7 +19,6 @@ export interface ISearchActions {
     getMoviesByName: (e: string) => void;
     clearMovies: () => void,
     getMoreMovies: () => void,
-    checkIfMoreAvailable: () => void,
 }
 
 type SearchComponentProps = ISearchProps & ISearchActions;
@@ -62,7 +61,6 @@ class SearchPage extends Component<SearchComponentProps, ISearchState> {
             list,
             toggleBtn,
             getMoreMovies,
-            checkIfMoreAvailable,
         } = this.props;
         const { showModal, selectedId } = this.state;
         return (
@@ -73,7 +71,7 @@ class SearchPage extends Component<SearchComponentProps, ISearchState> {
                 />
                 <List
                     movieList={list}
-                    loadMore={() => { getMoreMovies(); checkIfMoreAvailable(); }}
+                    loadMore={() => getMoreMovies()}
                     disableBtn={toggleBtn}
                     onClickDetail={(id: number) => this.setState({ showModal: true, selectedId: id })}
                 />

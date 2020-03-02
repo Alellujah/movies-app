@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { filter, switchMap, catchError, map } from 'rxjs/operators';
 import { RootAction, RootState, isActionOf } from 'typesafe-actions';
-import { getMoviesByName, getMoreMovies, checkIfMoreAvailable } from './actions';
+import { getMoviesByName, getMoreMovies } from './actions';
 import { Movie } from '../../../models';
 
 const API_KEY: string = "03b8572954325680265531140190fd2a";
@@ -46,20 +46,4 @@ export const getMoreMoviesEpic: Epic<
           ),
           catchError((err) => of(getMoreMovies.failure(err)))
         )
-      ));
-
-export const checkIfMoreAvailableEpic: Epic<
-  RootAction,
-  RootAction,
-  RootState
-> = (action$, state$) =>
-    action$.pipe(
-      filter(isActionOf(checkIfMoreAvailable.request)),
-      switchMap((action) =>
-        ajax.getJSON(`${URL}?api_key=${API_KEY}&query=${state$.value.movies.selectedMovie}&page=${state$.value.movies.pageNumber + 1}`).pipe(
-          map((response) =>
-            checkIfMoreAvailable.success(response as APIResponse)
-          ),
-          catchError((err) => of(checkIfMoreAvailable.failure(err)))
-        ),
       ));

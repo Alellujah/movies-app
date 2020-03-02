@@ -58,6 +58,10 @@ export const Button = styled.button`
     border-radius: 48px;
     outline: 0;
     margin-bottom: 64px;
+    transition: all ease .2s;
+  ${({ disabled }) => disabled && `
+    background: grey;
+  `}
   `;
 
 export const ButtonList = styled.button`

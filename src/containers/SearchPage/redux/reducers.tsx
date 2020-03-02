@@ -59,19 +59,19 @@ export const searchReducer: Reducer<MovieState, SearchActions> = (
             }
         case getType(searchActions.getMoreMovies.success):
             console.log('Getting more movies...');
-            return {
-                ...state,
-                list: Object.assign({ ...state.list }, keyBy(action.payload.results, o => o.id)),
-                pageNumber: state.pageNumber
-            }
-        case getType(searchActions.checkIfMoreAvailable.success):
-            console.log('Checking if theres more available...');
-            if (action.payload.results.length === 0) {
+            if (action.payload.total_pages === state.pageNumber) {
                 return {
                     ...state,
+                    list: Object.assign({ ...state.list }, keyBy(action.payload.results, o => o.id)),
                     toggleBtn: true
                 }
-            } else { return { ...state } }
+            } else {
+                return {
+                    ...state,
+                    list: Object.assign({ ...state.list }, keyBy(action.payload.results, o => o.id)),
+                    pageNumber: state.pageNumber
+                }
+            }
         default:
             return state
     }

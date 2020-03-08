@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Backdrop, ModalContent, ModalRight, ModalLeft, Lines, Row } from './styleComponents';
-import { ButtonList } from '../List/styleComponents';
+import { Modal, Backdrop, ModalContent, ModalRight, ModalLeft, Lines, Row, CloseModalBtn } from './styleComponents';
 
 interface IDetailsProps {
   id: number;
@@ -17,7 +16,6 @@ interface IDetailsProps {
 }
 
 class Detail extends Component<IDetailsProps> {
-
   render() {
     const { title,
       original_title,
@@ -32,8 +30,8 @@ class Detail extends Component<IDetailsProps> {
     return (
       <>
         {showModal &&
-          <Backdrop>
-            <Modal>              
+          <Backdrop onClick={(e) => (e.target === e.currentTarget && onClose())}>
+            <Modal>
               <ModalContent>
                 {poster_path &&
                   <ModalLeft>
@@ -41,18 +39,18 @@ class Detail extends Component<IDetailsProps> {
                   </ModalLeft>
                 }
                 <ModalRight>
-                  <h1>{title} details</h1>
+                  <h1>{title}</h1>
                   <Row>
-                  <Lines><span>Original Title: </span>{original_title}</Lines>
-                  <Lines><span>Release Date: </span>{release_date}</Lines>
-                  <Lines><span>Popularity:</span> {popularity}</Lines>
-                  <Lines><span>Original Language:</span> {original_language}</Lines>
-                  <Lines><span>Vote Avg:</span> {vote_average}</Lines>
+                    <Lines><span>Original Title: </span>{original_title}</Lines>
+                    <Lines><span>Release Date: </span>{release_date}</Lines>
+                    <Lines><span>Popularity:</span> {popularity}</Lines>
+                    <Lines><span>Original Language:</span> {original_language}</Lines>
+                    <Lines><span>Vote Avg:</span> {vote_average}</Lines>
                   </Row>
                   <Lines><span>Overview:</span> {overview}</Lines>
-                  <ButtonList onClick={onClose}>Close</ButtonList>
+                  <CloseModalBtn onClick={onClose}> X </CloseModalBtn>
                 </ModalRight>
-              </ModalContent>              
+              </ModalContent>
             </Modal>
           </Backdrop>
         }

@@ -8,6 +8,7 @@ interface MovieState {
     list: Movie[];
     pageNumber: number;
     toggleBtn: boolean;
+    noMoreResults: boolean;
 }
 
 const initialState: MovieState = {
@@ -15,6 +16,7 @@ const initialState: MovieState = {
     list: [],
     pageNumber: 1,
     toggleBtn: false,
+    noMoreResults: false
 }
 
 export type SearchActions = ActionType<typeof searchActions>;
@@ -62,14 +64,15 @@ export const searchReducer: Reducer<MovieState, SearchActions> = (
                 return {
                     ...state,
                     list: [...state.list, ...action.payload.results],
-                    toggleBtn: true
+                    toggleBtn: true,
+                    noMoreResults: true
                 }
             } else {
                 return {
                     ...state,
                     list: [...state.list, ...action.payload.results],
                     pageNumber: state.pageNumber,
-                    toggleBtn: false
+                    toggleBtn: false,
                 }
             }
         default:

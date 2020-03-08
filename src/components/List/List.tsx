@@ -7,6 +7,7 @@ interface IListProps {
   movieList: Movie[];
   loadMore: () => void;
   disableBtn?: boolean;
+  noMoreResults: boolean;
   onClickDetail: (id: number) => void;
 }
 
@@ -46,20 +47,20 @@ class List extends Component<IListProps> {
               </MoviesCard>)
           })
           :
-          <span>Nothing found</span>
+          <span>Start searching / try another</span>
         }
       </MoviesList>
     )
   }
 
   render() {
-    const { movieList, loadMore, disableBtn } = this.props;
+    const { movieList, loadMore, disableBtn, noMoreResults } = this.props;
     return (
       <>
         {this.renderList(movieList)}
-        {Object.keys(movieList).length > 0 &&
+        {movieList.length > 0 && !noMoreResults &&
           <Button disabled={disableBtn} onClick={() => loadMore()}>
-            {!disableBtn ? 'Load More' : 'No more results...'}
+            {!disableBtn ? 'Load More' : 'Loading...'}
           </Button>
         }
       </>

@@ -9,6 +9,7 @@ export interface ISearchProps {
     list: Movie[],
     pageNumber: number,
     toggleBtn: boolean,
+    noMoreResults: boolean,
 }
 
 interface ISearchState {
@@ -61,6 +62,7 @@ class SearchPage extends Component<SearchComponentProps, ISearchState> {
             list,
             toggleBtn,
             getMoreMovies,
+            noMoreResults
         } = this.props;
         const { showModal, selectedId } = this.state;
         return (
@@ -73,6 +75,7 @@ class SearchPage extends Component<SearchComponentProps, ISearchState> {
                     movieList={list}
                     loadMore={() => getMoreMovies()}
                     disableBtn={toggleBtn}
+                    noMoreResults={noMoreResults}
                     onClickDetail={(id: number) => this.setState({ showModal: true, selectedId: id })}
                 />
                 {showModal && this.renderDetails(list, selectedId)}

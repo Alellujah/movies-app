@@ -10,6 +10,7 @@ const mapStateToProps = (state: RootState): ISearchProps => ({
     list: state.movies.list,
     pageNumber: state.movies.pageNumber,
     toggleBtn: state.movies.toggleBtn,
+    noMoreResults: state.movies.noMoreResults
 });
 const mapDispatchToProps = (dispatch: Dispatch<SearchActions>) => {
     return {

@@ -3,12 +3,11 @@ import styled from 'styled-components';
 export const Modal = styled.div`
     background: #363636;
     color: white;
-    max-width: 60%;
+    max-width: 90%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    max-height: 70%;
-    overflow-y: scroll;
+    max-height: 60%;
+    overflow-y: auto;
     & > img{
         max-height: 30%;
     }
@@ -22,9 +21,12 @@ export const ModalContent = styled.div`
 export const ModalLeft = styled.div`
   margin-right: 16px;
   & > img {
-    max-width: 100%;
-  }
-`;
+    min-width: 15rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  };
+  `;
 
 export const ModalRight = styled.div`
   position:relative;
@@ -33,15 +35,7 @@ export const ModalRight = styled.div`
   flex-flow:column;  
   & > h1 {
     margin-top:0;
-  }
-  & > button {
-    position: absolute;
-    bottom:0;
-    right:0;
-    width: auto;
-    background: #ffdd00;
-    color: #333333;
-    padding:8px 16px;
+    max-width: 90%;
   }
 `;
 
@@ -70,4 +64,27 @@ export const Backdrop = styled.div`
     align-items: center;
     justify-content: center;
     overflow: hidden;
+  `;
+
+export const CloseModalBtn = styled.button`
+border:0;
+background-color: #ffdd00;
+position:absolute;
+top: 24px;
+right: 24px;
+cursor: pointer;
+border-radius:24px;
+font-weight: bold;
+font-size:.8rem;
+transition: all ease .2s;
+outline:0;
+width: 32px;
+height: 32px;
+&:focus{
+  outline:0;
+}
+&:hover{
+  background-color: #fff29e;
+  box-shadow: 1px 1px 8px #000000;
+}
   `;

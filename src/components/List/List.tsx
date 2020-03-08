@@ -16,8 +16,7 @@ class List extends Component<IListProps> {
     return (
       <MoviesList>
         {Object.keys(movieList).length > 0 ?
-          _map(Object.keys(movieList), (id: number) => {
-            const m: Movie = movieList[id];
+          _map(movieList, m => {
             return (
               <MoviesCard key={m.id}>
                 <MoviesRow>

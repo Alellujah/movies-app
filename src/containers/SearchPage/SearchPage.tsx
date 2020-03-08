@@ -6,7 +6,7 @@ import Detail from '../../components/Detail/Detail';
 
 export interface ISearchProps {
     selectedMovie: string,
-    list: { [key: number]: Movie },
+    list: Movie[],
     pageNumber: number,
     toggleBtn: boolean,
 }
@@ -37,8 +37,8 @@ class SearchPage extends Component<SearchComponentProps, ISearchState> {
         !!e.currentTarget.value ? getMoviesByName(e.currentTarget.value) : clearMovies()
     }
 
-    renderDetails(movieList: { [key: number]: Movie }, movieId: number) {
-        const m = movieList[movieId];
+    renderDetails(movieList: Movie[], movieId: number) {
+        const m = movieList.filter(m => m.id === movieId)[0];
         return (
             <Detail
                 id={m.id}

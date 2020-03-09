@@ -30,7 +30,7 @@ class Detail extends Component<IDetailsProps> {
     return (
       <>
         {showModal &&
-          <Backdrop onClick={(e) => (e.target === e.currentTarget && onClose())}>
+          <Backdrop data-testid="detail-id" onClick={(e) => (e.target === e.currentTarget && onClose())}>
             <Modal>
               <ModalContent>
                 {poster_path &&
@@ -41,13 +41,13 @@ class Detail extends Component<IDetailsProps> {
                 <ModalRight>
                   <h1>{title}</h1>
                   <Row>
-                    <Lines><span>Original Title: </span>{original_title}</Lines>
-                    <Lines><span>Release Date: </span>{release_date}</Lines>
-                    <Lines><span>Popularity:</span> {popularity}</Lines>
-                    <Lines><span>Original Language:</span> {original_language}</Lines>
-                    <Lines><span>Vote Avg:</span> {vote_average}</Lines>
+                    <Lines><span>Original Title: </span><div>{original_title}</div></Lines>
+                    <Lines><span>Release Date: </span><div>{release_date}</div></Lines>
+                    <Lines><span>Popularity:</span> <div>{popularity}</div></Lines>
+                    <Lines><span>Original Language:</span> <div>{original_language}</div></Lines>
+                    <Lines><span>Vote Avg:</span> <div>{vote_average}</div></Lines>
                   </Row>
-                  <Lines><span>Overview:</span> {overview}</Lines>
+                  <Lines><span>Overview:</span> <div>{overview}</div></Lines>
                   <CloseModalBtn onClick={onClose}> X </CloseModalBtn>
                 </ModalRight>
               </ModalContent>

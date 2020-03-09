@@ -14,7 +14,9 @@ class Search extends Component<ISearchProps> {
         <SearchInput type="text"
           value={selectedMovie}
           onChange={handleChange}
-          placeholder={'Search for movie'} />
+          placeholder={'Search for movie'}
+          data-testid="search-id"
+        />
       </>
     );
   }

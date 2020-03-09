@@ -14,10 +14,9 @@ interface IListProps {
 class List extends Component<IListProps> {
   renderList(movieList: Movie[]) {
     const { onClickDetail } = this.props;
-    console.log('rendering list');
     return (
-      <MoviesList>
-        {Object.keys(movieList).length > 0 ?
+      <MoviesList data-testid="list-id">
+        {movieList.length > 0 ?
           _map(movieList, m => {
             return (
               <MoviesCard key={m.id}>

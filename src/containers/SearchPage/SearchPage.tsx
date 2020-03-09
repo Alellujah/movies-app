@@ -3,6 +3,7 @@ import List from '../../components/List';
 import Search from '../../components/Search';
 import { Movie } from '../../models';
 import Detail from '../../components/Detail/Detail';
+import { OrderRow, OrderBtn } from './styleComponents';
 
 export interface ISearchProps {
     selectedMovie: string,
@@ -20,6 +21,7 @@ export interface ISearchActions {
     getMoviesByName: (e: string) => void;
     clearMovies: () => void,
     getMoreMovies: () => void,
+    orderMovies: (movies: Movie[]) => void;
 }
 
 type SearchComponentProps = ISearchProps & ISearchActions;
@@ -56,13 +58,25 @@ class SearchPage extends Component<SearchComponentProps, ISearchState> {
             />
         )
     }
-
+    orderListByPopularity(list: Movie[]): Movie[] {
+        list.sort((a, b) =>
+            b.popularity - a.popularity
+        )
+        return list;
+    }
+    orderListByRating(list: Movie[]): Movie[] {
+        list.sort((a, b) =>
+            +b.vote_average - +a.vote_average
+        )
+        return list;
+    }
     render() {
         const { selectedMovie,
             list,
             toggleBtn,
             getMoreMovies,
-            noMoreResults
+            noMoreResults,
+            orderMovies
         } = this.props;
         const { showModal, selectedId } = this.state;
         return (
@@ -71,6 +85,10 @@ class SearchPage extends Component<SearchComponentProps, ISearchState> {
                     selectedMovie={selectedMovie}
                     handleChange={(e: React.FormEvent<HTMLInputElement>) => this.handleChange(e)}
                 />
+                <OrderRow>
+                    <OrderBtn onClick={() => orderMovies(this.orderListByPopularity(list))}> Order by Highest Popularity</OrderBtn>
+                    <OrderBtn onClick={() => orderMovies(this.orderListByRating(list))}> Order by Highest Rating</OrderBtn>
+                </OrderRow>
                 <List
                     movieList={list}
                     loadMore={() => getMoreMovies()}

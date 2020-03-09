@@ -75,6 +75,11 @@ export const searchReducer: Reducer<MovieState, SearchActions> = (
                     toggleBtn: false,
                 }
             }
+        case getType(searchActions.orderMovies):
+            return {
+                ...state,
+                list: [...action.payload]
+            }
         default:
             return state
     }

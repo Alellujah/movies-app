@@ -5,7 +5,7 @@ transation: all ease .2s;
     min-width: 89%;
     min-height: 70vh;
   color:white;
-  margin: 148px 64px 64px 64px;
+  margin: 180px 64px 64px 64px;
   box-shadow: 1px 1px 8px #282828;
   border-radius: 8px;
   display: flex;

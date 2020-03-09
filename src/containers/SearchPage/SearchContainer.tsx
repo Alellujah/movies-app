@@ -4,6 +4,7 @@ import SearchPage, { ISearchProps } from "./SearchPage";
 import * as actions from './redux/actions';
 import { Dispatch } from 'redux';
 import { SearchActions } from "./redux/reducers";
+import { Movie } from "../../models";
 
 const mapStateToProps = (state: RootState): ISearchProps => ({
     selectedMovie: state.movies.selectedMovie,
@@ -17,6 +18,7 @@ const mapDispatchToProps = (dispatch: Dispatch<SearchActions>) => {
         getMoviesByName: (movieName: string) => dispatch(actions.getMoviesByName.request(movieName)),
         clearMovies: () => dispatch(actions.getMoviesByName.cancel()),
         getMoreMovies: () => dispatch(actions.getMoreMovies.request()),
+        orderMovies: (orderedList: Movie[]) => dispatch(actions.orderMovies(orderedList))
     }
 }
 

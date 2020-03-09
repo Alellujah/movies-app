@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const OrderRow = styled.div`
   position: fixed;
   top: 82px;
-  right: 40px;
+  right: 5%;
 `;
 
 export const OrderBtn = styled.button`
